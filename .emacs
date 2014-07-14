@@ -9,7 +9,6 @@
 
 ; treat .h files as c++
 (setq auto-mode-alist (cons '("\\.h$" . c++-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.ip$" . c++-mode) auto-mode-alist))
 
 ; skip startup screen, 
 ; show where in buffer you are
