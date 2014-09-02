@@ -9,6 +9,13 @@
 
 ; treat .h files as c++
 (setq auto-mode-alist (cons '("\\.h$" . c++-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.cu$" . c++-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.glsl$" . c++-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.cl$" . c++-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.ip$" . c++-mode) auto-mode-alist))
+
+; toggle between perk hotkeys or default hotkeys
+(global-set-key [(f2)] 'toggle-ergoemacs)
 
 ; skip startup screen, 
 ; show where in buffer you are
@@ -26,6 +33,9 @@
 
 ; Always show line-numbers
 (global-linum-mode 1)
+
+;; replace-string on M-r
+(global-set-key "\M-r" 'replace-string)
 
 ;; no overwrite mode (insert key)
 (put 'overwrite-mode 'disabled t)
@@ -56,6 +66,12 @@
 
 ;; Keep position when scrolling
 (setq scroll-preserve-screen-position t)
+
+(defun toggle-ergoemacs ()
+  (interactive)
+  (ergoemacs-mode)
+  (cua-mode)
+  )
 
 ; Show absolute path in window title
 (setq frame-title-format
@@ -1097,8 +1113,8 @@ disabled at `ergoemacs-restore-global-keys'."
 
 (define-key ergoemacs-keymap (kbd "<delete>") 'delete-char) ; the Del key for forward delete. Needed if C-d is set to nil.
 
-(define-key ergoemacs-keymap (kbd "C-<prior>") 'previous-user-buffer)
-(define-key ergoemacs-keymap (kbd "C-<next>") 'next-user-buffer)
+(define-key ergoemacs-keymap (kbd "C-<left>") 'previous-user-buffer)
+(define-key ergoemacs-keymap (kbd "C-<right>") 'next-user-buffer)
 
 (define-key ergoemacs-keymap (kbd "C-S-<prior>") 'previous-emacs-buffer)
 (define-key ergoemacs-keymap (kbd "C-S-<next>") 'next-emacs-buffer)
@@ -1505,7 +1521,7 @@ URL `http://xahlee.org/emacs/ergonomic_emacs_keybinding.html'
 
 If you turned on by mistake, the shortcut to call execute-extended-command is M-a."
   nil
-  :lighter " ErgoEmacs"	;; TODO this should be nil (it is for testing purposes)
+  :lighter " perk-hotkeys"	;; TODO this should be nil (it is for testing purposes)
   :global t
   :keymap ergoemacs-keymap
 
@@ -1513,9 +1529,6 @@ If you turned on by mistake, the shortcut to call execute-extended-command is M-
   )
 
 (ergoemacs-mode 1)
-
-;; replace-string on M-r
-(global-set-key "\M-r" 'replace-string)
 
 ;; use mac command key as meta
 (defvar mac_command (getenv "EMACS_COMMAND_AS_META"))
@@ -3127,13 +3140,11 @@ Based on the TextMate theme Monokai"
      (font-latex-slide-title-face ((t (:foreground "#c4a000")))) ; dark butter
      )))
 
-(color-theme-monokai)
-(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#272822" :foreground "#F8F8F2" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 110 :width normal :foundry "unknown" :family "DejaVu Sans Mono")))))
+
+(when (display-graphic-p) 
+  (custom-set-faces
+   '(default ((t (:inherit nil :stipple nil  :background "#272822" :foreground "#F8F8F2" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 110 :width normal :foundry "unknown" :family "DejaVu Sans Mono")))))
+  (color-theme-monokai))
 
 ;;; Code:
 ;;
@@ -3332,7 +3343,7 @@ the indentation.  Otherwise it retains the same position on the line"
 ;;
 ;; Indentation increment.
 ;;
-(defvar cmake-tab-width 2)
+(defvar cmake-tab-width 4)
 
 ;------------------------------------------------------------------------------
 
