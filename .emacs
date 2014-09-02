@@ -3518,3 +3518,7 @@ and store the result as a list in LISTVAR."
 (progn
   (add-to-list 'auto-mode-alist '("CMakeLists\\.txt\\'" . cmake-mode))
   (add-to-list 'auto-mode-alist '("\\.cmake\\'" . cmake-mode)))
+
+;; goto line
+(global-set-key "\M-`" 'goto-line)
+
