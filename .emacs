@@ -37,6 +37,9 @@
 ;; replace-string on M-r
 (global-set-key "\M-r" 'replace-string)
 
+;; goto line
+(global-set-key "\M-`" 'goto-line)
+
 ;; no overwrite mode (insert key)
 (put 'overwrite-mode 'disabled t)
 
@@ -770,7 +773,6 @@ Else it is a user buffer."
      "M-o"
      "M-p"
      "M-q"
-     "M-r"
      "M-s"
      "M-t"
      "M-u"
@@ -989,7 +991,7 @@ disabled at `ergoemacs-restore-global-keys'."
 ;;; OTHER SHORTCUTS
 
 (defconst ergoemacs-switch-to-previous-frame-key        (kbd "M-~"))
-(defconst ergoemacs-switch-to-next-frame-key            (kbd "M-`"))
+;(defconst ergoemacs-switch-to-next-frame-key            (kbd "M-`"))
 
 (defconst ergoemacs-query-replace-key                   (kbd "M-5"))
 (defconst ergoemacs-query-replace-regexp-key            (kbd "M-%"))
@@ -3518,7 +3520,3 @@ and store the result as a list in LISTVAR."
 (progn
   (add-to-list 'auto-mode-alist '("CMakeLists\\.txt\\'" . cmake-mode))
   (add-to-list 'auto-mode-alist '("\\.cmake\\'" . cmake-mode)))
-
-;; goto line
-(global-set-key "\M-`" 'goto-line)
-
