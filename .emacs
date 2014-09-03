@@ -37,9 +37,6 @@
 ;; replace-string on M-r
 (global-set-key "\M-r" 'replace-string)
 
-;; goto line
-(global-set-key "\M-`" 'goto-line)
-
 ;; no overwrite mode (insert key)
 (put 'overwrite-mode 'disabled t)
 
@@ -912,8 +909,8 @@ disabled at `ergoemacs-restore-global-keys'."
 (defconst ergoemacs-forward-word-key			(kbd "M-L"))
 
 ;; Move by paragraph
-(defconst ergoemacs-backward-paragraph-key		(kbd "M-U"))
-(defconst ergoemacs-forward-paragraph-key		(kbd "M-O"))
+(defconst ergoemacs-backward-paragraph-key		(kbd "M-6"))
+(defconst ergoemacs-forward-paragraph-key		(kbd "M-7"))
 
 ;; Move to beginning/ending of line
 (defconst ergoemacs-move-beginning-of-line-key		(kbd "M-u"))
@@ -991,7 +988,7 @@ disabled at `ergoemacs-restore-global-keys'."
 ;;; OTHER SHORTCUTS
 
 (defconst ergoemacs-switch-to-previous-frame-key        (kbd "M-~"))
-;(defconst ergoemacs-switch-to-next-frame-key            (kbd "M-`"))
+(defconst ergoemacs-switch-to-next-frame-key            (kbd "M-`"))
 
 (defconst ergoemacs-query-replace-key                   (kbd "M-5"))
 (defconst ergoemacs-query-replace-regexp-key            (kbd "M-%"))
@@ -1508,6 +1505,7 @@ any key unbound or claimed by ergoemacs."
       (ergoemacs-local-unset-key key)
     ad-do-it))
 
+
 ;;----------------------------------------------------------------------
 ;; ErgoEmacs minor mode
 
@@ -1529,6 +1527,7 @@ If you turned on by mistake, the shortcut to call execute-extended-command is M-
 
   (ergoemacs-hook-modes)
   )
+
 
 (ergoemacs-mode 1)
 
@@ -3142,11 +3141,81 @@ Based on the TextMate theme Monokai"
      (font-latex-slide-title-face ((t (:foreground "#c4a000")))) ; dark butter
      )))
 
+(defun color-theme-terminal ()
+  "Monokai color theme for Emacs by Operator.
+Based on the TextMate theme Monokai"
+  (interactive)
+  (color-theme-install
+   '(color-theme-monokai
+     ((foreground-color . "#FFFFFF")
+      (background-color . "#272822")
+      (background-mode . dark)
+      (cursor-color . "#73d216") ; medium chameleon
+      (mouse-color . "#73d216"))
+
+     ;;; Standard font lock faces
+     (default ((t (nil))))
+     (font-lock-comment-face ((t (:foreground "#646464")))) ; dark aluminum
+     (font-lock-comment-delimiter-face ((t (:foreground "#A3A3A3")))) ; dark aluminum
+     (font-lock-doc-face ((t (:foreground "#A3A3A3")))) ; plum
+     (font-lock-doc-string-face ((t (:foreground "#A3A3A3")))) ; plum
+     (font-lock-string-face ((t (:foreground "#E6DB74")))) ; plum
+     (font-lock-keyword-face ((t (:foreground "#F92672")))) ; light sky blue
+     (font-lock-builtin-face ((t (:foreground "#855c1b")))) ; med-dark chocolate
+     (font-lock-function-name-face ((t (:foreground "#A6E22E")))) ; dark butter
+     (font-lock-variable-name-face ((t (:foreground "#FD971F"))))
+     (font-lock-preprocessor-face ((t (:foreground "#66D9EF")))) ; aluminum
+     (font-lock-constant-face ((t (:foreground "#4e9a06")))) ; dark chameleon
+     (font-lock-type-face ((t (:foreground "#66D9EF")))) ; light plum
+     (font-lock-warning-face ((t (:bold t :foreground "#cc0000")))) ; scarlet red
+
+     ;; Search
+     (isearch ((t (:foreground "#080808" :background "#edd400"))))
+     (isearch-lazy-highlight-face ((t (:foreground "#080808" :background "#75715E"))))
+
+     ;; Emacs Interface
+     (fringe ((t (:background "#0f0f0f"))))
+     (border ((t (:background "#0f0f0f"))))
+     (mode-line ((t (:background "#1f1f1f" :foreground "#eeeeec"))))
+     (mode-line-buffer-id ((t (:background "#1f1f1f" :foreground "#eeeeec"))))
+     (mode-line-inactive ((t (:background "#1f1f1f" :foreground "#888a85"))))
+     (minibuffer-prompt ((t (:foreground "#729fcf")))) ; light sky blue
+     (region ((t (:background "#49483E"))))
+
+     ;; Parenthesis matching
+     (show-paren-match-face ((t (:foreground "#2e3436" :background "#cc0000"))))
+     (show-paren-mismatch-face ((t (:foreground "#2e3436" :background "#cc0000"))))
+
+     ;; Calendar
+     (holiday-face ((t (:foreground "#cc0000")))) ; dark scarlet red
+
+     ;; Info
+     (info-xref ((t (:foreground "#729fcf")))) ; light sky blue
+     (info-xref-visited ((t (:foreground "#ad7fa8")))) ; light plum
+
+     ;;; AUCTeX
+     (font-latex-sectioning-5-face ((t (:foreground "#c4a000" :bold t)))) ; dark butter
+     (font-latex-bold-face ((t (:foreground "#4e9a06" :bold t)))) ; dark chameleon
+     (font-latex-italic-face ((t (:foreground "#4e9a06" :italic t)))) ; dark chameleon
+     (font-latex-math-face ((t (:foreground "#855c1b")))) ; med-dark chocolate
+     (font-latex-string-face ((t (:foreground "#77507b")))) ; plum
+     (font-latex-warning-face ((t (:foreground "#cc0000")))) ; dark scarlet red
+     (font-latex-slide-title-face ((t (:foreground "#c4a000")))) ; dark butter
+     )))
 
 (when (display-graphic-p) 
   (custom-set-faces
    '(default ((t (:inherit nil :stipple nil  :background "#272822" :foreground "#F8F8F2" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 110 :width normal :foundry "unknown" :family "DejaVu Sans Mono")))))
   (color-theme-monokai))
+
+(unless (display-graphic-p) 
+  (custom-set-faces
+   '(default ((t (:inherit nil :stipple nil :background "#242424" :foreground "#FFFFFF" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 110 :width normal :foundry "unknown" :family "DejaVu Sans Mono")))))
+  (color-theme-terminal)
+  ; Always show line-numbers
+  (global-linum-mode 0) 
+)
+
 
 ;;; Code:
 ;;
@@ -3520,3 +3589,8 @@ and store the result as a list in LISTVAR."
 (progn
   (add-to-list 'auto-mode-alist '("CMakeLists\\.txt\\'" . cmake-mode))
   (add-to-list 'auto-mode-alist '("\\.cmake\\'" . cmake-mode)))
+
+;; goto line
+(global-set-key "\M-`" 'goto-line)
+
+(global-unset-key "^[O") 
